@@ -1,0 +1,57 @@
+TestID,TestName,Category,Priority,TestType,Username,Password,Role,ExpectedResult,Comments
+TC_LOGIN_001,Successful login with valid admin credentials,Positive,CRITICAL,Functional,santosh,Pipra,Pipra Admin,Login successful - Dashboard displays,Valid admin account
+TC_LOGIN_002,Successful login with valid user credentials,Positive,HIGH,Functional,[valid_user],[valid_pass],[assigned_role],Login successful - User dashboard displays,Valid user account
+TC_LOGIN_003,Multi-role selection after login,Positive,MEDIUM,Functional,[multi_role_user],[valid_pass],[multiple_roles],Multiple roles displayed - user can select different roles,User with multiple roles assigned
+TC_LOGIN_004,Login with invalid username,Negative,CRITICAL,Security,invaliduser@test,Pipra,N/A,Error message: Invalid User ID or Password,Non-existent username
+TC_LOGIN_005,Login with invalid password,Negative,CRITICAL,Security,santosh,wrongpassword,N/A,Error message: Invalid User ID or Password,Valid username wrong password
+TC_LOGIN_006,Login with both username and password invalid,Negative,HIGH,Security,invaliduser,invalidpass123,N/A,Error message displayed - Login fails,Both fields invalid
+TC_LOGIN_007,Login with case-sensitive username (wrong case),Negative,MEDIUM,Security,SANTOSH,Pipra,N/A,Error message - Case sensitive check,Test case sensitivity
+TC_LOGIN_008,Login with case-sensitive password (wrong case),Negative,MEDIUM,Security,santosh,pipra,N/A,Error message - Case sensitive check,Test case sensitivity
+TC_LOGIN_009,Login with extra spaces in username,Edge Case,MEDIUM,Boundary, santosh ,Pipra,Pipra Admin,Either trimmed and login succeeds or login fails,Whitespace handling
+TC_LOGIN_010,Login with extra spaces in password,Edge Case,MEDIUM,Boundary,santosh, Pipra ,N/A,Error or login succeeds (whitespace handling),Whitespace handling
+TC_LOGIN_011,Login with empty username,Edge Case,HIGH,Validation,(empty),Pipra,N/A,Validation error: Username is required,Empty field validation
+TC_LOGIN_012,Login with empty password,Edge Case,HIGH,Validation,santosh,(empty),N/A,Validation error: Password is required,Empty field validation
+TC_LOGIN_013,Login with both fields empty,Edge Case,HIGH,Validation,(empty),(empty),N/A,Validation errors for both fields,Empty field validation
+TC_LOGIN_014,Login with null/special characters as username,Edge Case,MEDIUM,Boundary,null,Pipra,N/A,Error message - Invalid input,Special value handling
+TC_LOGIN_015,SQL injection in username,Security,CRITICAL,Injection,' OR '1'='1,Pipra,N/A,Error: Invalid User ID or Password - No bypass,SQL injection blocking
+TC_LOGIN_016,SQL injection in password,Security,CRITICAL,Injection,santosh,' OR '1'='1' --,N/A,Error: Invalid User ID or Password - No bypass,SQL injection blocking
+TC_LOGIN_017,XSS payload in username,Security,CRITICAL,Injection,<script>alert('XSS')</script>,Pipra,N/A,No script execution - Error message displayed,XSS attack prevention
+TC_LOGIN_018,HTML/event injection,Security,CRITICAL,Injection,<img src=x onerror="alert(1)">,Pipra,N/A,No script execution - Error message displayed,HTML injection prevention
+TC_LOGIN_019,Command injection attempt,Security,CRITICAL,Injection,santosh; rm -rf /,Pipra,N/A,Error: Invalid User ID or Password - No command execution,Command injection blocking
+TC_LOGIN_020,Login with very long username,Boundary,HIGH,Boundary,[1000+ chars],Pipra,N/A,Input validation triggers or field has max length,Buffer overflow prevention
+TC_LOGIN_021,Login with very long password,Boundary,HIGH,Boundary,santosh,[1000+ chars],N/A,Input validation or field max length respected,Buffer overflow prevention
+TC_LOGIN_022,Login with Unicode/special characters,Boundary,MEDIUM,Boundary,सन्तोष,Pipra,N/A,Either accepted or rejected gracefully,Unicode support check
+TC_LOGIN_023,Account lockout after multiple failed attempts,Security,CRITICAL,Account Policy,santosh,[wrong_pass_x5],N/A,Account locked - Error: Account locked due to multiple failed attempts,Brute force protection
+TC_LOGIN_024,Account lockout duration / auto-unlock,Security,MEDIUM,Account Policy,[locked_account],[any_pass],N/A,Account unlocks after timeout period,Lockout timeout testing
+TC_LOGIN_025,Password expiry check,Security,HIGH,Account Policy,[expired_pwd_user],[expired_pwd],N/A,Redirect to password change page - User forced to change password,Password expiry enforcement
+TC_LOGIN_026,Default password enforcement,Security,HIGH,Account Policy,newuser,[default_pass],N/A,Login succeeds - Redirect to change password page,Default credentials handling
+TC_LOGIN_027,Password history check,Security,MEDIUM,Account Policy,[test_user],[old_recent_pass],N/A,Error: Cannot reuse recent passwords,Password history enforcement
+TC_LOGIN_028,Session creation after successful login,Functional,HIGH,Session Management,santosh,Pipra,Pipra Admin,Session cookie/token created with HttpOnly and Secure flags,Session security
+TC_LOGIN_029,Session timeout on inactivity,Functional,HIGH,Session Management,[logged_in_user],N/A,N/A,User session expires after timeout - redirect to login,Session timeout enforcement
+TC_LOGIN_030,Logout functionality,Functional,HIGH,Session Management,[logged_in_user],N/A,N/A,Session terminated - Cookies cleared - Redirect to login page,Proper logout
+TC_LOGIN_031,Multiple session handling same user,Functional,MEDIUM,Session Management,[same_user],[valid_pass],[role],Sessions handled correctly - either concurrent allowed or one invalidates other,Multiple session handling
+TC_LOGIN_032,Concurrent login attempts different devices,Functional,MEDIUM,Session Management,[same_user],[valid_pass],[role],Either allow concurrent logins or invalidate previous session consistently,Concurrent session policy
+TC_LOGIN_033,HTTPS enforcement and redirect,Network,CRITICAL,Security,N/A,N/A,N/A,Application uses HTTPS - No HTTP access,Secure connection
+TC_LOGIN_034,Login with network interruption,Network,HIGH,Resilience,santosh,Pipra,N/A,Clear error message - No session created - Can retry,Network failure handling
+TC_LOGIN_035,Login with slow network response,Network,MEDIUM,Performance,[test_creds],[test_creds],N/A,Login completes or fails gracefully with loading indicator,Slow network handling
+TC_LOGIN_036,Login on Chrome browser,Cross-Browser,HIGH,Compatibility,santosh,Pipra,Pipra Admin,Login successful - All functionality works,Browser compatibility
+TC_LOGIN_037,Login on Firefox browser,Cross-Browser,HIGH,Compatibility,santosh,Pipra,Pipra Admin,Login successful - All functionality works,Browser compatibility
+TC_LOGIN_038,Login on Safari browser,Cross-Browser,MEDIUM,Compatibility,santosh,Pipra,Pipra Admin,Login successful - All functionality works,Browser compatibility
+TC_LOGIN_039,Login on mobile browser,Cross-Browser,MEDIUM,Compatibility,santosh,Pipra,Pipra Admin,Login successful - Responsive design works - Touch interactions work,Mobile compatibility
+TC_LOGIN_040,Login with cookies disabled,Cross-Browser,HIGH,Compatibility,santosh,Pipra,Pipra Admin,Works with alternative session or error message to enable cookies,Cookie dependency check
+TC_LOGIN_041,Login with JavaScript disabled,Cross-Browser,MEDIUM,Compatibility,santosh,Pipra,Pipra Admin,Works with fallback or clear error message,JavaScript dependency check
+TC_LOGIN_042,Tab navigation through login form,Interaction,MEDIUM,Accessibility,[test_user],[test_pass],N/A,Logical tab order through all form elements,Keyboard accessibility
+TC_LOGIN_043,Login with Enter key submit,Interaction,MEDIUM,Accessibility,santosh,Pipra,Pipra Admin,Login submits and processes correctly,Keyboard submission
+TC_LOGIN_044,Password field masking,Interaction,HIGH,UX,santosh,Pipra,N/A,Password characters hidden as dots/asterisks,Security UX
+TC_LOGIN_045,Show/Hide password toggle,Interaction,MEDIUM,UX,santosh,Pipra,N/A,Toggle works - Password visible when shown - Hidden when toggled back,Password visibility control
+TC_LOGIN_046,Form autocomplete behavior,Interaction,MEDIUM,UX,[previous_user],N/A,N/A,Username autocomplete suggestions (or not per policy) - Password NOT suggested,Autocomplete security policy
+TC_LOGIN_047,Screen reader compatibility,Accessibility,MEDIUM,Accessibility,[test_creds],[test_creds],N/A,All form elements readable - Labels associated - Errors announced,Accessibility compliance
+TC_LOGIN_048,Color contrast for login form,Accessibility,MEDIUM,Accessibility,N/A,N/A,N/A,Contrast ratio meets WCAG AA (4.5:1) - Readable for color-blind users,Accessibility compliance
+TC_LOGIN_049,Font size and readability at 200% zoom,Accessibility,MEDIUM,Accessibility,N/A,N/A,N/A,Form scales properly - No elements cut off - Still usable and readable,Accessibility compliance
+TC_LOGIN_050,Password not logged in plaintext,Privacy,CRITICAL,Security,santosh,Pipra,Pipra Admin,Password not visible in application logs - Passwords hashed/masked,Data protection
+TC_LOGIN_051,Network traffic encryption (HTTPS),Privacy,CRITICAL,Security,[test_creds],[test_creds],N/A,Credentials not visible in plain text - HTTPS encryption verified,Network security
+TC_LOGIN_052,Browser DevTools analysis,Privacy,HIGH,Security,santosh,Pipra,Pipra Admin,Credentials not visible in URLs - POST used - No sensitive data in response,Developer tools security
+TC_LOGIN_053,GDPR login activity logging,Compliance,HIGH,Compliance,santosh,Pipra,Pipra Admin,Login timestamp logged - IP logged (if applicable) - Privacy policy followed,Compliance verification
+TC_LOGIN_054,Login via API request,Integration,HIGH,API,[api_user],[api_pass],N/A,Token/Session returned - Proper HTTP status codes (200/401) - Token usable,API authentication
+TC_LOGIN_055,Token refresh functionality,Integration,MEDIUM,API,[api_user],[api_pass],N/A,Expired token refreshed - New token issued - Old token invalidated,Token refresh mechanism
+TC_LOGIN_056,API rate limiting on login endpoint,Integration,HIGH,Security,[test_user],[test_pass],N/A,Rate limit triggered after N requests - Error 429 returned - Limit resets after timeout,Brute force protection

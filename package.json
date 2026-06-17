@@ -1,0 +1,28 @@
+{
+  "name": "warepro_automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "allure-playwright": "^3.4.2"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "playwright": "^1.56.1",
+    "playwright-core": "^1.56.1",
+    "undici-types": "^7.16.0",
+    "allure-js-commons": "^3.4.2",
+    "charenc": "^0.0.2",
+    "crypt": "^0.0.2",
+    "is-buffer": "^1.1.6",
+    "md5": "^2.3.0"
+  },
+  "description": ""
+}
