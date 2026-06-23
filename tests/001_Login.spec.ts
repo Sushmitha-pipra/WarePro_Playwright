@@ -20,7 +20,7 @@ test.describe('Login functionality' , ()=>{
    test('Login into Warepro web application @login', async ({page})=>{
 
    await basePage.navigateToUrl('https://dev.warepro.in/webui/index.zul');
-   await loginPage.loginToWarepro('santosh','santosh','Pipra Admin');
+   await loginPage.loginToWarepro('Santosh','santosh','Pipra Admin');
    
 
    })
